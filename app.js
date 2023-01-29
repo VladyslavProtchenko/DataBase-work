@@ -7,8 +7,9 @@ const getAllUsersByUni = (uni) => {
     univercity.uni = name.university_name;
 
     const unis = DB[0].data.unis.find(item=> (item.uni === uni))
-    
-    univercity.uniUrl = DB[0].data.unis.map(item=> {if(item.uni === uni) return item.urlPrefix})
+    univercity.uniUrl = unis.urlPrefix
+
+    // console.log(unis);
     univercity.students = DB.filter(item=>(item.p_key.includes(uni) && item.s_key === "STUDENT_DETAILS")).map(item=>{
         
         const split = item.p_key.split('#');
@@ -48,11 +49,12 @@ const getAllUsersByUni = (uni) => {
         shortCode: 'ADM',
         list: admins
     }
+    
     return univercity
 };
 
 
-const stgUsers = getAllUsersByUni('OI');
+const stgUsers = getAllUsersByUni('STG');
 console.log(stgUsers);
 
 
